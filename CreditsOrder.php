@@ -60,6 +60,6 @@ final class CreditsOrder extends GDO implements Orderable
 	##############
 	### Render ###
 	##############
-	public function renderCard() { return GDO_Template::php('PaymentCredits', 'card/credits_order.php', ['gdo' => $this]); }
+	public function renderCard() { return GDO_Template::responsePHP('PaymentCredits', 'card/credits_order.php', ['gdo' => $this]); }
 
 }
