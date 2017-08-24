@@ -1,0 +1,45 @@
+<?php
+namespace GDO\PaymentCredits\Method;
+
+use GDO\Core\Method;
+use GDO\Payment\Order;
+use GDO\PaymentCredits\Module_PaymentCredits;
+use GDO\User\User;
+use GDO\Util\Common;
+use GDO\Core\Website;
+/**
+ * Pay with own gwf credits.
+ * @author gizmore
+ * @version 5.0
+ */
+final class Pay extends Method
+{
+	public function isAlwaysTransactional() { return true; }
+	
+	public function execute()
+	{
+		$user = User::current();
+		$module = Module_PaymentCredits::instance();
+		
+				# Check
+		if ( (!($order = Order::getById(Common::getRequestString('order', '0')))) ||
+			 ($order->isPaid()) || (!$order->isCreator($user)) )
+		{
+		    return $this->error('err_order')->add(
+		        $order ? $order->redirectFailure() : Website::redirect(href(GWF_MODULE, GWF_METHOD)));
+		}
+		
+		# Pay?
+		$price = $order->getPrice();
+		$credits = $module->priceToCredits($price);
+		if ($user->getCredits() < $credits)
+		{
+			$response = $this->error('err_no_credits', [$order->displayPrice(), $credits, $user->getCredits()]);
+			return $response->add($order->redirectFailure());
+		}
+		
+		# Pay and Exec
+		$user->increase('user_credits', -$credits);
+		return $order->executeOrder();
+	}
+}
