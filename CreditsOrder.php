@@ -2,13 +2,13 @@
 namespace GDO\PaymentCredits;
 
 use GDO\DB\GDO;
-use GDO\DB\GDO_AutoInc;
+use GDO\DB\GDT_AutoInc;
 use GDO\Payment\Orderable;
 use GDO\Payment\PaymentModule;
-use GDO\Template\GDO_Template;
+use GDO\Template\GDT_Template;
 use GDO\Template\Message;
-use GDO\Type\GDO_Int;
-use GDO\User\GDO_User;
+use GDO\Type\GDT_Int;
+use GDO\User\GDT_User;
 use GDO\User\User;
 /**
  * Order own credits and pay with another payment processor.
@@ -41,9 +41,9 @@ final class CreditsOrder extends GDO implements Orderable
 	public function gdoColumns()
 	{
 		return array(
-			GDO_AutoInc::make('co_id'),
-			GDO_User::make('co_user')->notNull(),
-			GDO_Int::make('co_credits')->unsigned()->notNull()->min($this->paymentCredits()->cfgMinPurchaseCredits())->label('credits'),
+			GDT_AutoInc::make('co_id'),
+			GDT_User::make('co_user')->notNull(),
+			GDT_Int::make('co_credits')->unsigned()->notNull()->min($this->paymentCredits()->cfgMinPurchaseCredits())->label('credits'),
 		);
 	}
 	
@@ -60,6 +60,6 @@ final class CreditsOrder extends GDO implements Orderable
 	##############
 	### Render ###
 	##############
-	public function renderCard() { return GDO_Template::responsePHP('PaymentCredits', 'card/credits_order.php', ['gdo' => $this]); }
+	public function renderCard() { return GDT_Template::responsePHP('PaymentCredits', 'card/credits_order.php', ['gdo' => $this]); }
 
 }

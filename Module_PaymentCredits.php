@@ -1,12 +1,12 @@
 <?php
 namespace GDO\PaymentCredits;
 
-use GDO\Payment\GDO_Money;
+use GDO\Payment\GDT_Money;
 use GDO\Payment\Module_Payment;
 use GDO\Payment\PaymentModule;
-use GDO\Template\GDO_Bar;
-use GDO\Type\GDO_Checkbox;
-use GDO\Type\GDO_Decimal;
+use GDO\Template\GDT_Bar;
+use GDO\Type\GDT_Checkbox;
+use GDO\Type\GDT_Decimal;
 /**
  * Pay with own credits.
  * Buy own credits.
@@ -38,9 +38,9 @@ final class Module_PaymentCredits extends PaymentModule
 	public function getConfig()
 	{
 		return array_merge(parent::getConfig(), array(
-			GDO_Checkbox::make('paycreds_guests')->initial('0'),
-			GDO_Decimal::make('paycreds_min_purchase')->digits(6, 2)->initial('5.00'),
-			GDO_Decimal::make('paycreds_rate')->digits(1, 4)->initial('0.01'),
+			GDT_Checkbox::make('paycreds_guests')->initial('0'),
+			GDT_Decimal::make('paycreds_min_purchase')->digits(6, 2)->initial('5.00'),
+			GDT_Decimal::make('paycreds_rate')->digits(1, 4)->initial('0.01'),
 		));
 	}
 	public function cfgAllowGuests() { return $this->getConfigValue('paycreds_guests'); }
@@ -55,13 +55,13 @@ final class Module_PaymentCredits extends PaymentModule
 	###############
 	public function priceToCredits($price) { return floor($this->cfgConversionRateToCredits() * $price); }
 	public function creditsToPrice($credits) { return round($this->cfgConversionRateToCurrency() * $credits, 2); }
-	public function displayPrice($price) { return sprintf('%.02f %s', $price, GDO_Money::$CURR); }
+	public function displayPrice($price) { return sprintf('%.02f %s', $price, GDT_Money::$CURR); }
 	public function displayCreditsPrice($credits) { return $this->displayPrice($this->creditsToPrice($credits)); }
 	
 	###############
 	### Sidebar ###
 	###############
-	public function hookRightBar(GDO_Bar $navbar)
+	public function hookRightBar(GDT_Bar $navbar)
 	{
 		$this->templatePHP('rightbar.php', ['navbar' => $navbar]);
 	}

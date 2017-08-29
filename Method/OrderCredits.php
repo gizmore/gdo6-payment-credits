@@ -1,8 +1,8 @@
 <?php
 namespace GDO\PaymentCredits\Method;
-use GDO\Form\GDO_AntiCSRF;
-use GDO\Form\GDO_Form;
-use GDO\Form\GDO_Submit;
+use GDO\Form\GDT_AntiCSRF;
+use GDO\Form\GDT_Form;
+use GDO\Form\GDT_Submit;
 use GDO\Payment\Payment_Order;
 use GDO\PaymentCredits\CreditsOrder;
 use GDO\PaymentCredits\Module_PaymentCredits;
@@ -22,14 +22,14 @@ final class OrderCredits extends Payment_Order
 		));
 	}
 	
-	public function createForm(GDO_Form $form)
+	public function createForm(GDT_Form $form)
 	{
 		$module = Module_PaymentCredits::instance();
 		$gdo = CreditsOrder::table();
 		$form->addFields(array(
 			$gdo->gdoColumn('co_credits')->initial($module->cfgMinPurchaseCredits()),
-			GDO_Submit::make(),
-			GDO_AntiCSRF::make(),
+			GDT_Submit::make(),
+			GDT_AntiCSRF::make(),
 		));
 	}
 
