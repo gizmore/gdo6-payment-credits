@@ -9,16 +9,16 @@ use GDO\Template\GDT_Template;
 use GDO\Template\Message;
 use GDO\Type\GDT_Int;
 use GDO\User\GDT_User;
-use GDO\User\User;
+use GDO\User\GDO_User;
 /**
  * Order own credits and pay with another payment processor.
  * @author gizmore
  */
-final class CreditsOrder extends GDO implements Orderable
+final class GDO_CreditsOrder extends GDO implements Orderable
 {
 	public function paymentCredits() { return Module_PaymentCredits::instance(); }
-	public function getOrderCancelURL(User $user) { return url('PaymentCredits', 'OrderCredits'); }
-	public function getOrderSuccessURL(User $user) { return url('PaymentCredits', 'OrderCredits'); }
+	public function getOrderCancelURL(GDO_User $user) { return url('PaymentCredits', 'OrderCredits'); }
+	public function getOrderSuccessURL(GDO_User $user) { return url('PaymentCredits', 'OrderCredits'); }
 	
 	public function getOrderTitle(string $iso) { return t('card_title_credits_order', [$this->getCredits()]); }
 	public function getOrderPrice() { return $this->paymentCredits()->creditsToPrice($this->getCredits()); }

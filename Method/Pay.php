@@ -2,9 +2,9 @@
 namespace GDO\PaymentCredits\Method;
 
 use GDO\Core\Method;
-use GDO\Payment\Order;
+use GDO\Payment\GDO_Order;
 use GDO\PaymentCredits\Module_PaymentCredits;
-use GDO\User\User;
+use GDO\User\GDO_User;
 use GDO\Util\Common;
 use GDO\Core\Website;
 /**
@@ -18,11 +18,11 @@ final class Pay extends Method
 	
 	public function execute()
 	{
-		$user = User::current();
+		$user = GDO_User::current();
 		$module = Module_PaymentCredits::instance();
 		
 				# Check
-		if ( (!($order = Order::getById(Common::getRequestString('order', '0')))) ||
+		if ( (!($order = GDO_Order::getById(Common::getRequestString('order', '0')))) ||
 			 ($order->isPaid()) || (!$order->isCreator($user)) )
 		{
 		    return $this->error('err_order')->add(

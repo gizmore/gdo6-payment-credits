@@ -1,9 +1,9 @@
 <?php
-use GDO\Payment\Order;
+use GDO\Payment\GDO_Order;
 use GDO\PaymentCredits\Module_PaymentCredits;
 use GDO\Template\GDT_Bar;
 use GDO\UI\GDT_Button;
-$order instanceof Order; 
+$order instanceof GDO_Order; 
 ?>
 <?php
 $user = $order->getUser();

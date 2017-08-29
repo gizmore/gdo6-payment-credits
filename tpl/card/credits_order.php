@@ -1,7 +1,6 @@
 <?php
-use GDO\PaymentCredits\CreditsOrder;
-
-$gdo instanceof CreditsOrder;
+use GDO\PaymentCredits\GDO_CreditsOrder;
+$gdo instanceof GDO_CreditsOrder;
 $user = $gdo->getUser();
 ?>
 <md-card class="gdo-credits-order">

@@ -2,7 +2,7 @@
 namespace GDO\PaymentCredits\Method;
 
 use GDO\Payment\MethodPayment;
-use GDO\Payment\Order;
+use GDO\Payment\GDO_Order;
 /**
  * Pay with own gwf credits.
  * @author gizmore
@@ -19,7 +19,7 @@ final class InitPayment extends MethodPayment
 		return $this->renderOrder($order)->add($this->templateButton($order));
 	}
 	
-	private function templateButton(Order $order)
+	private function templateButton(GDO_Order $order)
 	{
 		return $this->templatePHP('paybutton.php', ['order' => $order]);
 	}

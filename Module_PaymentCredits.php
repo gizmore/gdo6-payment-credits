@@ -28,7 +28,7 @@ final class Module_PaymentCredits extends PaymentModule
 	##############
 	### Module ###
 	##############
-	public function getClasses() { return ['GDO\PaymentCredits\CreditsOrder']; }
+	public function getClasses() { return ['GDO\PaymentCredits\GDO_CreditsOrder']; }
 	public function onLoadLanguage() { return $this->loadLanguage('lang/credits'); }
 	public function payment() { return Module_Payment::instance(); }
 
