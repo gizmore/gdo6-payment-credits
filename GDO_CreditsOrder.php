@@ -51,7 +51,7 @@ final class GDO_CreditsOrder extends GDO implements Orderable
 	### Getter ###
 	##############
 	/**
-	 * @return User
+	 * @return GDO_User
 	 */
 	public function getUser() { return $this->getValue('co_user'); }
 	public function getUserID() { return $this->getVar('co_user'); }
