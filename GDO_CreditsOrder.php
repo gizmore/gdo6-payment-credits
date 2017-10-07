@@ -5,9 +5,9 @@ use GDO\Core\GDO;
 use GDO\DB\GDT_AutoInc;
 use GDO\Payment\Orderable;
 use GDO\Payment\PaymentModule;
-use GDO\Template\GDT_Template;
-use GDO\Template\Message;
-use GDO\Type\GDT_Int;
+use GDO\Core\GDT_Template;
+use GDO\Core\GDT_Success;
+use GDO\DB\GDT_Int;
 use GDO\User\GDT_User;
 use GDO\User\GDO_User;
 /**
@@ -20,7 +20,7 @@ final class GDO_CreditsOrder extends GDO implements Orderable
 	public function getOrderCancelURL(GDO_User $user) { return url('PaymentCredits', 'OrderCredits'); }
 	public function getOrderSuccessURL(GDO_User $user) { return url('PaymentCredits', 'OrderCredits'); }
 	
-	public function getOrderTitle(string $iso) { return t('card_title_credits_order', [$this->getCredits()]); }
+	public function getOrderTitle($iso) { return t('card_title_credits_order', [$this->getCredits()]); }
 	public function getOrderPrice() { return $this->paymentCredits()->creditsToPrice($this->getCredits()); }
 	public function displayPrice() { return $this->paymentCredits()->displayPrice($this->getOrderPrice()); }
 	public function canPayOrderWith(PaymentModule $module) { return true; }
@@ -32,7 +32,7 @@ final class GDO_CreditsOrder extends GDO implements Orderable
 		$oldCredits = $user->getCredits();
 		$user->increase('user_credits', $credits);
 		$newCredits = $user->getCredits();
-		return Message::message('msg_credits_purchased', [$credits, $oldCredits, $newCredits]);
+		return GDT_Success::responseWith('msg_credits_purchased', [$credits, $oldCredits, $newCredits]);
 	}
 	
 	###########

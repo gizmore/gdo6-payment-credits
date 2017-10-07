@@ -1,6 +1,6 @@
 <?php
 namespace GDO\PaymentCredits;
-use GDO\Type\GDT_Int;
+use GDO\DB\GDT_Int;
 use GDO\User\GDO_User;
 
 final class GDT_Credits extends GDT_Int

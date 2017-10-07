@@ -4,9 +4,9 @@ namespace GDO\PaymentCredits;
 use GDO\Payment\GDT_Money;
 use GDO\Payment\Module_Payment;
 use GDO\Payment\PaymentModule;
-use GDO\Template\GDT_Bar;
-use GDO\Type\GDT_Checkbox;
-use GDO\Type\GDT_Decimal;
+use GDO\UI\GDT_Bar;
+use GDO\DB\GDT_Checkbox;
+use GDO\DB\GDT_Decimal;
 /**
  * Pay with own credits.
  * Buy own credits.
@@ -19,7 +19,7 @@ final class Module_PaymentCredits extends PaymentModule
     #####################
 	### PaymentModule ###
 	#####################
-	public function makePaymentButton(string $href)
+	public function makePaymentButton($href)
 	{
 		$button = parent::makePaymentButton($href);
 		return $button->label('buy_paymentcredits', [sitename()]);
