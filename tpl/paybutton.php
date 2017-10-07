@@ -12,6 +12,6 @@ $price = $order->getPrice();
 $module = Module_PaymentCredits::instance();
 $button = GDT_Button::make()->label('btn_pay_credits', [$module->priceToCredits($price), $user->getCredits()]);
 $button->href(href('PaymentCredits', 'Pay', '&order='.$order->getID()));
-$button->icon('attach_money');
+$button->icon('money');
 $bar->addField($button);
 echo $bar->renderCell();
