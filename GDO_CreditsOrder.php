@@ -43,7 +43,7 @@ final class GDO_CreditsOrder extends GDO implements Orderable
 		return array(
 			GDT_AutoInc::make('co_id'),
 			GDT_User::make('co_user')->notNull(),
-			GDT_Int::make('co_credits')->unsigned()->notNull()->min($this->paymentCredits()->cfgMinPurchaseCredits())->label('credits'),
+			GDT_Int::make('co_credits')->unsigned()->notNull()->label('credits'),
 		);
 	}
 	
