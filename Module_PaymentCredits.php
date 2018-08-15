@@ -16,7 +16,7 @@ use GDO\DB\GDT_Decimal;
  */
 final class Module_PaymentCredits extends PaymentModule
 {
-    #####################
+	#####################
 	### PaymentModule ###
 	#####################
 	public function makePaymentButton($href)

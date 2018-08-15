@@ -25,8 +25,8 @@ final class Pay extends Method
 		if ( (!($order = GDO_Order::getById(Common::getRequestString('order', '0')))) ||
 			 ($order->isPaid()) || (!$order->isCreator($user)) )
 		{
-		    return $this->error('err_order')->add(
-		        $order ? $order->redirectFailure() : Website::redirect(href(GWF_MODULE, GWF_METHOD)));
+			return $this->error('err_order')->add(
+				$order ? $order->redirectFailure() : Website::redirect(href(GWF_MODULE, GWF_METHOD)));
 		}
 		
 		# Pay?

@@ -16,7 +16,7 @@ final class OrderCredits extends Payment_Order
 {
 	public function getOrderable()
 	{
-	    return GDO_CreditsOrder::blank(array(
+		return GDO_CreditsOrder::blank(array(
 			'co_user' => GDO_User::current()->getID(),
 			'co_credits' => $this->getForm()->getFormVar('co_credits'),
 		));
