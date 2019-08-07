@@ -2,7 +2,7 @@
 return array(
 'module_paymentcredits' => 'Credits',
 'link_credits' => 'Credits (%s)',
-'ft_paymentcredits_ordercredits' => '[%s] Purchase Credits',
+'ft_paymentcredits_ordercredits' => 'Purchase Credits',
 'card_title_credits_order' => 'Purchase %s Credits',
 'card_title_credits_price' => 'Purchase %s Credits for %s.',
 'card_info_credits_price' => 'Increase your credits account by %s.<br/>This cost %s and is not reversible.',
