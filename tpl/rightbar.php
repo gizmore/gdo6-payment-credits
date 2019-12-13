@@ -9,3 +9,9 @@ if ($user->isAuthenticated())
 	$link = GDT_Link::make()->label('link_credits', [$user->getCredits()])->href(href('PaymentCredits', 'OrderCredits'));
 	$navbar->addField($link);
 }
+
+if ($user->isAdmin())
+{
+	$link = GDT_Link::make()->label('link_grant_credits')->href(href('PaymentCredits', 'GrantCredits'));
+	$navbar->addField($link);
+}

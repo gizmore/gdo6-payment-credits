@@ -14,4 +14,18 @@ return array(
 'btn_pay_credits' => 'Pay %s of %s Credits',
 'msg_credits_purchased' => 'You have purchased <b>%s</b> Credits and increased your balance from %s to <b>%s</b>.',
 'err_no_credits' => 'You have not enought credits.<br/>The order total is %s, which equals %s credits and you have %s.',
+
+### Grant
+'link_grant_credits' => 'Grant Credits',
+'ft_paymentcredits_grantcredits' => 'Grant Credits',
+'msg_credits_granted' => 'You have granted %s credits to %s. The user has %s credits now.',
+'mail_subj_credits_granted' => 'Credits granted',
+'mail_body_credits_granted' =>
+'Hello %s,
+
+you have been granted %s credits on %s.
+You now own %s credits.
+
+Kind regards
+The %3$s team',
 );
