@@ -32,5 +32,10 @@ final class OrderCredits extends Payment_Order
 			GDT_AntiCSRF::make(),
 		));
 	}
+	
+// 	public function cancelOrder()
+// 	{
+		
+// 	}
 
 }

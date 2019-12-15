@@ -17,13 +17,13 @@ use GDO\User\GDO_User;
 final class GDO_CreditsOrder extends GDO implements Orderable
 {
 	public function paymentCredits() { return Module_PaymentCredits::instance(); }
-	public function getOrderCancelURL(GDO_User $user) { return url('PaymentCredits', 'OrderCredits'); }
+	public function getOrderCancelURL(GDO_User $user) { return url('PaymentCredits', 'OrderCredits', "&order={$this->getID()}&cancel=1"); }
 	public function getOrderSuccessURL(GDO_User $user) { return url('PaymentCredits', 'OrderCredits'); }
 	
 	public function getOrderTitle($iso) { return t('card_title_credits_order', [$this->getCredits()]); }
 	public function getOrderPrice() { return $this->paymentCredits()->creditsToPrice($this->getCredits()); }
 	public function displayPrice() { return $this->paymentCredits()->displayPrice($this->getOrderPrice()); }
-	public function canPayOrderWith(PaymentModule $module) { return true; }
+	public function canPayOrderWith(PaymentModule $module) { return !($module instanceof Module_PaymentCredits); }
 	
 	public function onOrderPaid()
 	{
@@ -61,5 +61,6 @@ final class GDO_CreditsOrder extends GDO implements Orderable
 	### Render ###
 	##############
 	public function renderCard() { return GDT_Template::php('PaymentCredits', 'card/credits_order.php', ['gdo' => $this]); }
+	public function renderOrderCard() { return $this->renderCard(); }
 
 }
