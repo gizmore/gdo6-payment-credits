@@ -7,6 +7,7 @@ use GDO\PaymentCredits\Module_PaymentCredits;
 use GDO\User\GDO_User;
 use GDO\Util\Common;
 use GDO\Core\Website;
+use GDO\Payment\Module_Payment;
 /**
  * Pay with own gwf credits.
  * @author gizmore
@@ -40,6 +41,6 @@ final class Pay extends Method
 		
 		# Pay and Exec
 		$user->increase('user_credits', -$credits);
-		return $order->executeOrder();
+		return Module_Payment::instance()->onExecuteOrder($module, $order);
 	}
 }
