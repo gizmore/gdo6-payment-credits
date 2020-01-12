@@ -16,6 +16,8 @@ use GDO\User\GDO_User;
  */
 final class GDO_CreditsOrder extends GDO implements Orderable
 {
+	public function isPriceWithTax() { return true; }
+	
 	public function paymentCredits() { return Module_PaymentCredits::instance(); }
 	public function getOrderCancelURL(GDO_User $user) { return url('PaymentCredits', 'OrderCredits', "&order={$this->getID()}&cancel=1"); }
 	public function getOrderSuccessURL(GDO_User $user) { return url('PaymentCredits', 'OrderCredits'); }

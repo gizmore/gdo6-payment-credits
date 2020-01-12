@@ -1,6 +1,7 @@
 <?php
 return array(
 'module_paymentcredits' => 'Credits',
+'payment_paymentcredits' => 'Credits',
 'cfg_fee_buy' => 'Gebühr in %',
 'cfg_paycreds_guests' => 'Erlaube Gästen mit Credits zu bezahlen?',
 'cfg_paycreds_min_purchase' => 'Mindestanzahl Credits für Bestellung',

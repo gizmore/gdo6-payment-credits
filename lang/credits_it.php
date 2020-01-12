@@ -1,6 +1,7 @@
 <?php
 return array(
 'module_paymentcredits' => 'Credito',
+'payment_paymentcredits' => 'Credito',
 'cfg_fee_buy' => 'Commissione in %',
 'cfg_paycreds_guests' => 'Permetti ospiti di pagare con credito?',
 'cfg_paycreds_min_purchase' => 'Credito minimo per ordinazione',

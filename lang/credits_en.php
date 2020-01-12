@@ -1,6 +1,7 @@
 <?php
 return array(
 'module_paymentcredits' => 'Credits',
+'payment_paymentcredits' => 'Credits',
 'cfg_fee_buy' => 'Fee when buying with credits',
 'cfg_paycreds_guests' => 'Allow guests to purchase with credits',
 'cfg_paycreds_min_purchase' => 'Minimum order value for credits',

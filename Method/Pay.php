@@ -39,8 +39,11 @@ final class Pay extends Method
 			return $response->add($order->redirectFailure());
 		}
 		
+		$order->saveVar('order_xtoken', $module->getTransferPurpose($order));
+
 		# Pay and Exec
 		$user->increase('user_credits', -$credits);
+		
 		return Module_Payment::instance()->onExecuteOrder($module, $order);
 	}
 }
