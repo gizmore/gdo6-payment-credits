@@ -7,6 +7,7 @@ use GDO\Payment\PaymentModule;
 use GDO\UI\GDT_Bar;
 use GDO\DB\GDT_Checkbox;
 use GDO\DB\GDT_Decimal;
+use GDO\Payment\GDO_Order;
 /**
  * Pay with own credits.
  * Buy own credits.
@@ -19,9 +20,9 @@ final class Module_PaymentCredits extends PaymentModule
 	#####################
 	### PaymentModule ###
 	#####################
-	public function makePaymentButton($href)
+	public function makePaymentButton(GDO_Order $order=null)
 	{
-		$button = parent::makePaymentButton($href);
+		$button = parent::makePaymentButton($order);
 		return $button->label('buy_paymentcredits', [sitename()]);
 	}
 	
