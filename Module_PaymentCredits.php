@@ -8,6 +8,8 @@ use GDO\UI\GDT_Bar;
 use GDO\DB\GDT_Checkbox;
 use GDO\DB\GDT_Decimal;
 use GDO\Payment\GDO_Order;
+use GDO\Payment\Orderable;
+use GDO\Address\GDO_Address;
 /**
  * Pay with own credits.
  * Buy own credits.
@@ -66,5 +68,15 @@ final class Module_PaymentCredits extends PaymentModule
 	public function hookRightBar(GDT_Bar $navbar)
 	{
 		$this->templatePHP('rightbar.php', ['navbar' => $navbar]);
+	}
+	
+	################
+	### Override ###
+	################
+	public function getPrice(Orderable $orderable, GDO_Address $address)
+	{
+		$price = $orderable->getOrderPrice();
+		$price = round(($this->cfgFeeBuy() + 1.00) * floatval($price), 2);
+		return $price;
 	}
 }
