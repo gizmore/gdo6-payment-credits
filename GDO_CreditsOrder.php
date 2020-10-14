@@ -7,9 +7,9 @@ use GDO\Payment\Orderable;
 use GDO\Payment\PaymentModule;
 use GDO\Core\GDT_Template;
 use GDO\Core\GDT_Success;
-use GDO\DB\GDT_Int;
 use GDO\User\GDT_User;
 use GDO\User\GDO_User;
+use GDO\DB\GDT_UInt;
 /**
  * Order own credits and pay with another payment processor.
  * @author gizmore
@@ -51,7 +51,7 @@ final class GDO_CreditsOrder extends GDO implements Orderable
 		return array(
 			GDT_AutoInc::make('co_id'),
 			GDT_User::make('co_user')->notNull(),
-			GDT_Int::make('co_credits')->unsigned()->notNull()->label('credits'),
+			GDT_UInt::make('co_credits')->icon('credits')->notNull()->label('credits'),
 		);
 	}
 	
