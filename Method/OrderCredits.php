@@ -33,9 +33,4 @@ final class OrderCredits extends Payment_Order
 		));
 	}
 	
-// 	public function cancelOrder()
-// 	{
-		
-// 	}
-
 }
