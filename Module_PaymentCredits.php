@@ -4,17 +4,21 @@ namespace GDO\PaymentCredits;
 use GDO\Payment\GDT_Money;
 use GDO\Payment\Module_Payment;
 use GDO\Payment\PaymentModule;
-use GDO\UI\GDT_Bar;
+use GDO\UI\GDT_Link;
 use GDO\DB\GDT_Checkbox;
 use GDO\DB\GDT_Decimal;
 use GDO\Payment\GDO_Order;
 use GDO\Payment\Orderable;
 use GDO\Address\GDO_Address;
+use GDO\UI\GDT_Page;
+use GDO\User\GDO_User;
+
 /**
  * Pay with own credits.
  * Buy own credits.
  * @author gizmore
  * @license MIT
+ * @version 6.10
  * @since 4.0
  */
 final class Module_PaymentCredits extends PaymentModule
@@ -42,12 +46,14 @@ final class Module_PaymentCredits extends PaymentModule
 	public function getConfig()
 	{
 		return array_merge(parent::getConfig(), array(
-			GDT_Checkbox::make('paycreds_guests')->initial('0'),
-			GDT_Decimal::make('paycreds_min_purchase')->digits(6, 2)->initial('5.00'),
+		    GDT_Checkbox::make('paycreds_guests')->initial('0'),
+		    GDT_Checkbox::make('paycreds_right_bar')->initial('1'),
+		    GDT_Decimal::make('paycreds_min_purchase')->digits(6, 2)->initial('5.00'),
 			GDT_Decimal::make('paycreds_rate')->digits(1, 4)->initial('0.01'),
 		));
 	}
 	public function cfgAllowGuests() { return $this->getConfigValue('paycreds_guests'); }
+	public function cfgRightBar() { return $this->getConfigValue('paycreds_right_bar'); }
 	public function cfgMinPurchasePrice() { return $this->getConfigValue('paycreds_min_purchase'); }
 	public function cfgMinPurchaseCredits() { return $this->priceToCredits($this->cfgMinPurchasePrice()); }
 	public function cfgConversionRate() { return $this->getConfigValue('paycreds_rate'); }
@@ -65,9 +71,23 @@ final class Module_PaymentCredits extends PaymentModule
 	###############
 	### Sidebar ###
 	###############
-	public function hookRightBar(GDT_Bar $navbar)
+	public function onInitSidebar()
 	{
-		$this->templatePHP('rightbar.php', ['navbar' => $navbar]);
+// 	    if ($this->cfgRightBar())
+	    {
+	        $user = GDO_User::current();
+	        $navbar = GDT_Page::$INSTANCE->rightNav;
+	        if ($user->isAuthenticated())
+	        {
+	            $link = GDT_Link::make()->label('link_credits', [$user->getCredits()])->href(href('PaymentCredits', 'OrderCredits'));
+	            $navbar->addField($link);
+	        }
+	        if ($user->isStaff())
+	        {
+	            $link = GDT_Link::make()->label('link_grant_credits')->href(href('PaymentCredits', 'GrantCredits'));
+	            $navbar->addField($link);
+	        }
+	    }
 	}
 	
 	################
