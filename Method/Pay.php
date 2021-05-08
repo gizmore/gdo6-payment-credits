@@ -27,7 +27,7 @@ final class Pay extends Method
 		if ( (!($order = GDO_Order::getById(Common::getRequestString('order', '0')))) ||
 			 ($order->isPaid()) || (!$order->isCreator($user)) )
 		{
-			return $this->error('err_order')->add(
+			return $this->error('err_order')->addField(
 				$order ? $order->redirectFailure() : Website::redirect(href(GDO_MODULE, GDO_METHOD)));
 		}
 		
@@ -37,7 +37,7 @@ final class Pay extends Method
 		if ($user->getCredits() < $credits)
 		{
 			$response = $this->error('err_no_credits', [$order->displayPrice(), $credits, $user->getCredits()]);
-			return $response->add($order->redirectFailure());
+			return $response->addField($order->redirectFailure());
 		}
 		
 		$order->saveVar('order_xtoken', $module->getTransferPurpose($order));

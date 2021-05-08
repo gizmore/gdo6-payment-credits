@@ -18,7 +18,7 @@ final class InitPayment extends MethodPayment
 		{
 			return $this->error('err_order');
 		}
-		return $this->renderOrder($order)->add($this->templateButton($order));
+		return $this->renderOrder($order)->addField($this->templateButton($order));
 	}
 	
 	private function templateButton(GDO_Order $order)
