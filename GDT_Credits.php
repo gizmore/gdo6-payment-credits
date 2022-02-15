@@ -13,7 +13,6 @@ final class GDT_Credits extends GDT_Int
 	protected function __construct()
 	{
 		parent::__construct();
-		$this->unsigned = true;
 		$this->icon('money');
 	}
 	
